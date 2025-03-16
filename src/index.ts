@@ -18,3 +18,14 @@ export async function proxyMessage(server, requestMessage): Promise<void> {
 
     return responseMessage
 }
+
+export function validateHeaders(headers, requiredHeaders: Map<string, string>) {
+    let missingHeaders = new Map<string, string>();
+    for (let entry in requiredHeaders) {
+        if (!(headers.get(entry))) {
+            missingHeaders[entry] = requiredHeaders[entry]
+        }
+    };
+
+    return missingHeaders;
+}
