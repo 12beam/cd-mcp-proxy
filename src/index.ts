@@ -20,10 +20,13 @@ export async function proxyMessage(server, requestMessage): Promise<void> {
 }
 
 export function validateHeaders(headers, requiredHeaders: Map<string, string>) {
-    let missingHeaders = new Map<string, string>();
+    const missingHeaders = [];
     for (let entry in requiredHeaders) {
         if (!(headers.get(entry))) {
-            missingHeaders[entry] = requiredHeaders[entry]
+            missingHeaders.push({
+                header: entry,
+                description: requiredHeaders[entry]
+            });
         }
     };
 
